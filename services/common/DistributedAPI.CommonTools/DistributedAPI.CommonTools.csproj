@@ -35,5 +35,11 @@
   <ItemGroup>
     <Folder Include="Extensions\Internal\" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Identity.Web.UI" Version="4.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
+  </ItemGroup>
 
 </Project>

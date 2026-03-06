@@ -16,6 +16,9 @@ public static class ApplicationBuilderExtensions
         var commonOptions = new CommonApiApplicationBuilderOptions();
         configure?.Invoke(commonOptions);
 
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {

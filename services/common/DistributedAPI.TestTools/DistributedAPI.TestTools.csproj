@@ -29,7 +29,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="DistributedAPI.CommonTools" Version="1.0.0" />
+    <PackageReference Include="DistributedAPI.CommonTools" Version="1.0.0-local-202603061928" />
   </ItemGroup>
 
 </Project>

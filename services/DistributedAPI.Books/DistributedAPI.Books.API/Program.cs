@@ -1,6 +1,4 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using DistributedAPI.Books.API;
+using DistributedAPI.CommonTools;
 
-app.MapGet("/", () => "Hello World!");
-
-app.Run();
+ApiHost.Run<Startup>(args);

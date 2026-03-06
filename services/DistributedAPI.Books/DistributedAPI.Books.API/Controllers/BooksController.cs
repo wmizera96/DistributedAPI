@@ -12,6 +12,7 @@ public class BooksController : BaseController
         _booksService = booksService;
     }
     
+    [HttpGet]
     public async Task<IActionResult> GetBooks(CancellationToken cancellationToken)
     {
         return Ok(await _booksService.GetBooksAsync(cancellationToken));
