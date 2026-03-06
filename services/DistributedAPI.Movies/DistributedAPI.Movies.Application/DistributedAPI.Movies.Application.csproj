@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DistributedAPI.CommonTools" Version="1.0.0-local-202603062248" />
+    <PackageReference Include="DistributedAPI.CommonTools" Version="1.0.0-local-202603062307" />
   </ItemGroup>
 
 </Project>

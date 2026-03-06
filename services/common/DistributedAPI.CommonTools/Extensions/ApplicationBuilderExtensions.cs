@@ -11,13 +11,20 @@ public static class ApplicationBuilderExtensions
     internal const string ReadinessHealthCheckEndpoint = "health/ready";
     internal const string VersionEndpoint = "version";
     
+    private const string AzureAdSwaggerClientIdKey = "AzureAd:SwaggerClientId";
+    
     public static IApplicationBuilder UseCommonApi(this IApplicationBuilder app, IConfiguration configuration, Action<CommonApiApplicationBuilderOptions>? configure = null)
     {
         var commonOptions = new CommonApiApplicationBuilderOptions();
         configure?.Invoke(commonOptions);
 
+        var clientId = configuration.GetValue<string>(AzureAdSwaggerClientIdKey);
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(options =>
+        {
+            options.OAuthClientId(clientId);
+            options.OAuthUsePkce(); // ważne dla Authorization Code Flow
+        });
         
         app.UseRouting();
         
