@@ -1,2 +1,21 @@
 <Solution>
+  <Folder Name="/services/" />
+  <Folder Name="/services/common/">
+    <Project Path="services/common/DistributedAPI.CommonTools/DistributedAPI.CommonTools.csproj" />
+    <Project Path="services/common/DistributedAPI.TestTools/DistributedAPI.TestTools.csproj" />
+  </Folder>
+  <Folder Name="/services/DistributedAPI.Books/">
+    <Project Path="services/DistributedAPI.Books/DistributedAPI.Books.API/DistributedAPI.Books.API.csproj" />
+    <Project Path="services/DistributedAPI.Books/DistributedAPI.Books.Application/DistributedAPI.Books.Application.csproj" />
+  </Folder>
+  <Folder Name="/services/DistributedAPI.Books/tests/">
+    <Project Path="services/DistributedAPI.Books/tests/DistributedAPI.Books.API.IntegrationTests/DistributedAPI.Books.API.IntegrationTests.csproj" />
+  </Folder>
+  <Folder Name="/services/DistributedAPI.Movies/">
+    <Project Path="services/DistributedAPI.Movies/DistributedAPI.Movies.API/DistributedAPI.Movies.API.csproj" />
+    <Project Path="services/DistributedAPI.Movies/DistributedAPI.Movies.Application/DistributedAPI.Movies.Application.csproj" />
+  </Folder>
+  <Folder Name="/services/DistributedAPI.Movies/tests/">
+    <Project Path="services/DistributedAPI.Movies/tests/DistributedAPI.Movies.API.IntegrationTests/DistributedAPI.Movies.API.IntegrationTests.csproj" />
+  </Folder>
 </Solution>
