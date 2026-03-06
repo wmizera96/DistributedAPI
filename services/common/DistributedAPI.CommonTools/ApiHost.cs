@@ -34,7 +34,11 @@ public class ApiHost
     
     private static void SetupConfiguration(HostBuilderContext context, IConfigurationBuilder builder)
     {
-        var keyVaultUrlString = context.Configuration["KeyVault:Url"];
+        // force reading the appsettings.json, sometimees they are not added yet at this point
+        builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+        var tempConfig = builder.Build();
+        
+        var keyVaultUrlString = tempConfig["KeyVault:Url"];
 
         if (!string.IsNullOrWhiteSpace(keyVaultUrlString))
         {
