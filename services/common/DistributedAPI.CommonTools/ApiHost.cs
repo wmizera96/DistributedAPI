@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Azure.Identity;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
@@ -33,6 +34,12 @@ public class ApiHost
     
     private static void SetupConfiguration(HostBuilderContext context, IConfigurationBuilder builder)
     {
-        // setup custom configuration
+        var keyVaultUrlString = context.Configuration["KeyVault:Url"];
+
+        if (!string.IsNullOrWhiteSpace(keyVaultUrlString))
+        {
+            var keyVaultUrl = new Uri(keyVaultUrlString);
+            builder.AddAzureKeyVault(keyVaultUrl, new DefaultAzureCredential());
+        }
     }
 }
