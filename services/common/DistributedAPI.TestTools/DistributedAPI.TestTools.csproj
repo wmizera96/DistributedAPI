@@ -4,6 +4,19 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Version>1.0.0.0</Version>
+    <Authors>wmizera</Authors>
+    <Company>wmizera Inc.</Company>
+    <Product>DistributedAPI</Product>
+    <Description>Test tools for DistributedAPI project</Description>
+    <IsPackable>true</IsPackable>
+    <PackageOutputPath>$(SolutionDir)local-nuget</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Release notes</PackageReleaseNotes>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DistributedAPI.CommonTools" Version="1.0.0" />
+  </ItemGroup>
 
 </Project>
