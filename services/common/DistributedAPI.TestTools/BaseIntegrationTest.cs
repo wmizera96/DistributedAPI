@@ -1,15 +1,15 @@
 ﻿using DistributedAPI.CommonTools;
-using Xunit;
 
 namespace DistributedAPI.TestTools;
 
-public class BaseIntegrationTest<TStartup> : IClassFixture<ApiFactory<TStartup>> where TStartup : class
+public class BaseIntegrationTest<TStartup> where TStartup : class
 {
     protected ApiCaller<TStartup> ApiCaller { get; }
     protected IEnumerable<BasePolicy> DefaultPolicies { get; set; } = new List<BasePolicy>();
 
-    public BaseIntegrationTest(ApiFactory<TStartup> apiFactory)
+    public BaseIntegrationTest()
     {
-        ApiCaller = new ApiCaller<TStartup>(apiFactory);
+        var factory = new ApiFactory<TStartup>();
+        ApiCaller = new ApiCaller<TStartup>(factory);
     }
 }

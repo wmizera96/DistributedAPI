@@ -24,7 +24,7 @@ public class CommonApiApplicationBuilderOptions
     
     public CommonApiApplicationBuilderOptions UseLivenessHealthCheck(Func<HttpContext, Task> healthCheck)
     {
-        ReadinessHealthCheck = healthCheck;
+        LivenessHealthCheck = healthCheck;
 
         return this;
     }
