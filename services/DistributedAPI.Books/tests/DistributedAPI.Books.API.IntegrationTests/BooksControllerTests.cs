@@ -2,13 +2,12 @@
 using DistributedAPI.Books.Application.Model;
 using DistributedAPI.TestTools;
 using DistributedAPI.TestTools.Extensions;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace DistributedAPI.Books.API.IntegrationTests;
 
 public class BooksControllerTests : BaseIntegrationTest<Startup>
 {
-    public BooksControllerTests(ApiFactory<Startup> apiFactory) : base(apiFactory)
+    public BooksControllerTests()
     {
         DefaultPolicies = new [] { BooksPolicy.Read,  BooksPolicy.Write };
     }
