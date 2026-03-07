@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 namespace DistributedAPI.TestTools;
 
 
-public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+internal class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     private readonly TestUserContext _userContext;
 

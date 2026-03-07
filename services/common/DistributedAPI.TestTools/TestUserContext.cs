@@ -2,4 +2,4 @@
 
 namespace DistributedAPI.TestTools;
 
-public record TestUserContext(IEnumerable<BasePolicy> Policies, bool IsAuthenticated);
+internal record TestUserContext(IEnumerable<BasePolicy> Policies, bool IsAuthenticated);

@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\DistributedAPI.TestTools\DistributedAPI.TestTools.csproj" />
-    <ProjectReference Include="..\DistributedAPI.CommonTools.Test.API\DistributedAPI.CommonTools.Test.API.csproj" />
+    <ProjectReference Include="..\DistributedAPI.CommonTools.TestApi\DistributedAPI.CommonTools.TestApi.csproj" />
   </ItemGroup>
 
 </Project>

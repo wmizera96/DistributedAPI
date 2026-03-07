@@ -5,7 +5,7 @@
     <Project Path="services/common/DistributedAPI.TestTools/DistributedAPI.TestTools.csproj" />
   </Folder>
   <Folder Name="/services/common/tests/">
-    <Project Path="services/common/tests/DistributedAPI.CommonTools.Test.API/DistributedAPI.CommonTools.Test.API.csproj" />
+    <Project Path="services/common/tests/DistributedAPI.CommonTools.TestApi/DistributedAPI.CommonTools.TestApi.csproj" />
     <Project Path="services/common/tests/DistributedAPI.CommonTools.Tests/DistributedAPI.CommonTools.Tests.csproj" />
   </Folder>
   <Folder Name="/services/DistributedAPI.Books/">
