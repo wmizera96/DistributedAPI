@@ -1,4 +1,5 @@
 ﻿using DistributedAPI.Books.Application;
+using DistributedAPI.Books.Application.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,5 +19,12 @@ public class BooksController : BaseController
     public async Task<IActionResult> GetBooks(CancellationToken cancellationToken)
     {
         return Ok(await _booksService.GetBooksAsync(cancellationToken));
+    }
+    
+    [HttpPost]
+    [Authorize(nameof(BooksPolicy.Write))]
+    public async Task<IActionResult> PostBook(Book book, CancellationToken cancellationToken)
+    {
+        return Ok(book);
     }
 }

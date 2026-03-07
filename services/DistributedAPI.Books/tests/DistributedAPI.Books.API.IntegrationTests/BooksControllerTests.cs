@@ -1,6 +1,8 @@
-﻿using DistributedAPI.Books.Application.Model;
+﻿using System.Net;
+using DistributedAPI.Books.Application.Model;
 using DistributedAPI.TestTools;
 using DistributedAPI.TestTools.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DistributedAPI.Books.API.IntegrationTests;
 
@@ -12,6 +14,16 @@ public class BooksControllerTests : BaseIntegrationTest<Startup>
     }
 
     [Fact]
+    public async Task GetBooks_WhenCalledWithInsufficientPermissions_Returns403()
+    {
+        // Act
+        var response = await ApiCaller.GetAsync("api/books", new [] { BooksPolicy.Write });
+        
+        // Assert
+        Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
+    }
+    
+    [Fact]
     public async Task GetBooks_WhenCalled_ReturnsOkResult()
     {
         // Act
@@ -20,6 +32,23 @@ public class BooksControllerTests : BaseIntegrationTest<Startup>
         // Assert
         var content = await response.GetContentAsync<IEnumerable<Book>>();
         
-        Assert.Equal(content.Count(), 2);
+        Assert.Equal(2, content.Count());
+    }
+    
+    [Fact]
+    public async Task PostBook_WhenCalled_ReturnsOkResult()
+    {
+        // Arrange
+        var data = new Book("someTitle", "someDescription", DateTime.Now);
+        
+        // Act
+        var response = await ApiCaller.PostAsync("api/books", data, DefaultPolicies);
+        
+        // Assert
+        var content = await response.GetContentAsync<Book>();
+        
+        Assert.Equal(data.Title, content.Title);
+        Assert.Equal(data.Author, content.Author);
+        Assert.Equal(data.PublicationDate, content.PublicationDate);
     }
 }
