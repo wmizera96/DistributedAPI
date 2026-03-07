@@ -41,8 +41,8 @@ public class ApiFactory<TStartup> : WebApplicationFactory<TStartup> where TStart
             services.AddAuthorization();
             
             services.AddScoped<TestUserContext>(_ => new TestUserContext(_policies));
+            
+            _configureServices?.Invoke(services);
         });
-        
-        builder.ConfigureServices(_configureServices);
     }
 }

@@ -1,12 +1,12 @@
-﻿using DistributedAPI.CommonTools.Extensions;
+using DistributedAPI.CommonTools.Extensions;
 
 namespace DistributedAPI.CommonTools.Test.API;
 
-public class Startup
+public class DefaultHealthCheckStartup
 {
     private IConfiguration Configuration { get; }
     
-    public Startup(IConfiguration configuration)
+    public DefaultHealthCheckStartup(IConfiguration configuration)
     {
         Configuration = configuration;
     }
@@ -24,8 +24,7 @@ public class Startup
     {
         app.UseCommonApi(Configuration, options =>
         {
-            options.UseReadinessHealthCheck(async context => await context.RequestServices.GetRequiredService<ITestHealthCheckService>().RunAsync());
-            options.UseLivenessHealthCheck(async context => await context.RequestServices.GetRequiredService<ITestHealthCheckService>().RunAsync());
+            // no custom health-checks defined
         });
     }
 }

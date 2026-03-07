@@ -1,4 +1,4 @@
 using DistributedAPI.CommonTools;
 using DistributedAPI.CommonTools.Test.API;
 
-ApiHost.Run<Startup>(args);
+ApiHost.Run<VersionStartup>(args);

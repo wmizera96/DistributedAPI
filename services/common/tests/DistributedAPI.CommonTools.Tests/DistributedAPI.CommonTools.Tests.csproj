@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
-    <PackageReference Include="DistributedAPI.TestTools" Version="1.0.0-local-202603070818" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="xunit.v3" Version="3.2.2" />
@@ -21,10 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Setup\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\DistributedAPI.TestTools\DistributedAPI.TestTools.csproj" />
     <ProjectReference Include="..\DistributedAPI.CommonTools.Test.API\DistributedAPI.CommonTools.Test.API.csproj" />
   </ItemGroup>
 

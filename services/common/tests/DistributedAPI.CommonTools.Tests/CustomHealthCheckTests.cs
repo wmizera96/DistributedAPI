@@ -8,43 +8,9 @@ using Moq;
 
 namespace DistributedAPI.CommonTools.Tests;
 
-public class BaseIntegrationTest<TStartup> where TStartup : class
+
+public class CustomHealthCheckTests : BaseIntegrationTest<CustomHealthCheckStartup>
 {
-    protected ApiCaller<TStartup> ApiCaller { get; }
-    protected IEnumerable<BasePolicy> DefaultPolicies { get; set; } = new List<BasePolicy>();
-
-    public BaseIntegrationTest()
-    {
-        var factory = new ApiFactory<TStartup>();
-        ApiCaller = new ApiCaller<TStartup>(factory);
-    }
-}
-
-
-public class HealthCheckTests : BaseIntegrationTest<Startup>
-{
-    public int Index { get; set; }
-    
-    public HealthCheckTests()
-    {
-    }
-
-    [Fact]
-    public void Test1()
-    {
-        ++Index;
-        
-        Assert.Equal(1, Index);
-    }
-    
-    [Fact]
-    public void Test2()
-    {
-        ++Index;
-        
-        Assert.Equal(1, Index);
-    }
-
     [Fact]
     public async Task LivenessHealthCheck_WhenPass_ReturnsHealthy()
     {
@@ -58,10 +24,10 @@ public class HealthCheckTests : BaseIntegrationTest<Startup>
         });
         
         // Act
-        var response = await ApiCaller.GetAsync("health/live", Array.Empty<BasePolicy>());
+        var response = await ApiCaller.GetAsync("health/live", DefaultPolicies);
         
         // Assert
-        //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var content = await response.GetContentAsync<LivenessHealthCheckResponse>();
         Assert.Equal("ok", content.Status);
         Assert.True(content.Live);
@@ -71,7 +37,7 @@ public class HealthCheckTests : BaseIntegrationTest<Startup>
     public async Task LivenessHealthCheck_WhenZFails_ReturnsUnealthy()
     {
         // Arrange
-        var exceptionMessage = "1the cake is a lie";
+        var exceptionMessage = "The cake is a lie.";
         var serviceMock = new Mock<ITestHealthCheckService>();
         serviceMock.Setup(m => m.RunAsync()).ThrowsAsync(new Exception(exceptionMessage));
         
@@ -81,7 +47,7 @@ public class HealthCheckTests : BaseIntegrationTest<Startup>
         });
         
         // Act
-        var response = await ApiCaller.GetAsync("health/live", Array.Empty<BasePolicy>());
+        var response = await ApiCaller.GetAsync("health/live", DefaultPolicies);
         
         // Assert
         Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
@@ -103,10 +69,10 @@ public class HealthCheckTests : BaseIntegrationTest<Startup>
         });
         
         // Act
-        var response = await ApiCaller.GetAsync("health/ready", Array.Empty<BasePolicy>());
+        var response = await ApiCaller.GetAsync("health/ready", DefaultPolicies);
         
         // Assert
-        //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var content = await response.GetContentAsync<ReadinessHealthCheckResponse>();
         Assert.Equal("ok", content.Status);
         Assert.True(content.Ready);
@@ -116,7 +82,7 @@ public class HealthCheckTests : BaseIntegrationTest<Startup>
     public async Task ReadinessHealthCheck_WhenZFails_ReturnsUnealthy()
     {
         // Arrange
-        var exceptionMessage = "2the cake is a lie";
+        var exceptionMessage = "There is no spoon.";
         var serviceMock = new Mock<ITestHealthCheckService>();
         serviceMock.Setup(m => m.RunAsync()).ThrowsAsync(new Exception(exceptionMessage));
         
@@ -126,7 +92,7 @@ public class HealthCheckTests : BaseIntegrationTest<Startup>
         });
         
         // Act
-        var response = await ApiCaller.GetAsync("health/ready", Array.Empty<BasePolicy>());
+        var response = await ApiCaller.GetAsync("health/ready", DefaultPolicies);
         
         // Assert
         Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);

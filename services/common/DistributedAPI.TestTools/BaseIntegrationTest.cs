@@ -1,15 +1,21 @@
 ﻿using DistributedAPI.CommonTools;
+using Xunit;
 
 namespace DistributedAPI.TestTools;
 
-public class BaseIntegrationTest<TStartup> where TStartup : class
+public class BaseIntegrationTest<TStartup> : IClassFixture<ApiFactory<TStartup>>, IAsyncLifetime where TStartup : class
 {
-    protected ApiCaller<TStartup> ApiCaller { get; }
+    protected ApiCaller<TStartup> ApiCaller { get; set; }
     protected IEnumerable<BasePolicy> DefaultPolicies { get; set; } = new List<BasePolicy>();
 
-    public BaseIntegrationTest()
+    public ValueTask DisposeAsync()
     {
-        var factory = new ApiFactory<TStartup>();
-        ApiCaller = new ApiCaller<TStartup>(factory);
+        return ValueTask.CompletedTask;
+    }
+
+    public ValueTask InitializeAsync()
+    {
+        ApiCaller = new ApiCaller<TStartup>(new ApiFactory<TStartup>());
+        return ValueTask.CompletedTask;
     }
 }
