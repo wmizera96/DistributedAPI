@@ -11,7 +11,7 @@ public class AuthorizationTests : BaseIntegrationTest<AuthorizationStartup>
     public async Task Get_WhenMissingPermissions_ReturnsForbidden()
     {
         // Act
-        var response = await ApiCaller.GetAsync("api/test", new[] { TestPolicy.Write });
+        var response = await ApiCaller.GetAsync("api/authorization", new[] { TestPolicy.Write });
         
         // Assert
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
@@ -21,7 +21,7 @@ public class AuthorizationTests : BaseIntegrationTest<AuthorizationStartup>
     public async Task Get_WhenHasPermissions_ReturnsOk()
     {
         // Act
-        var response = await ApiCaller.GetAsync("api/test", new[] { TestPolicy.Read });
+        var response = await ApiCaller.GetAsync("api/authorization", new[] { TestPolicy.Read });
         
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -31,7 +31,7 @@ public class AuthorizationTests : BaseIntegrationTest<AuthorizationStartup>
     public async Task Get_WhenUnauthenticated_ReturnsUnauthorized()
     {
         // Act
-        var response = await ApiCaller.GetAsync("api/test", new[] { TestPolicy.Read }, false);
+        var response = await ApiCaller.GetAsync("api/authorization", new[] { TestPolicy.Read }, false);
         
         // Assert
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -41,7 +41,7 @@ public class AuthorizationTests : BaseIntegrationTest<AuthorizationStartup>
     public async Task Post_WhenHasPermissions_ReturnsOk()
     {
         // Act
-        var response = await ApiCaller.PostAsync("api/test", new {}, new[] { TestPolicy.Write });
+        var response = await ApiCaller.PostAsync("api/authorization", new {}, new[] { TestPolicy.Write });
         
         // Assert
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -51,7 +51,7 @@ public class AuthorizationTests : BaseIntegrationTest<AuthorizationStartup>
     public async Task Post_WhenUnauthenticated_ReturnsUnauthorized()
     {
         // Act
-        var response = await ApiCaller.PostAsync("api/test", new{}, new[] { TestPolicy.Read }, false);
+        var response = await ApiCaller.PostAsync("api/authorization", new{}, new[] { TestPolicy.Read }, false);
         
         // Assert
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -61,7 +61,7 @@ public class AuthorizationTests : BaseIntegrationTest<AuthorizationStartup>
     public async Task GetUnprotected_WhenUnauthenticated_ReturnsOK()
     {
         // Act
-        var response = await ApiCaller.GetAsync("api/test/unprotected", new[] { TestPolicy.Read }, false);
+        var response = await ApiCaller.GetAsync("api/authorization/unprotected", new[] { TestPolicy.Read }, false);
         
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

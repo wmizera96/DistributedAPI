@@ -1,4 +1,4 @@
-﻿namespace DistributedAPI.CommonTools.Test.API;
+﻿namespace DistributedAPI.CommonTools.Test.API.Services;
 
 public interface ITestHealthCheckService
 {

@@ -10,7 +10,7 @@ namespace DistributedAPI.CommonTools;
 public class CommonExceptionHandler : IExceptionHandler
 {
     private readonly IHostEnvironment _env;
-    public const HttpStatusCode DefaultStatusCode = HttpStatusCode.InternalServerError;
+    public const HttpStatusCode DefaultHttpStatusCode = HttpStatusCode.InternalServerError;
     public const string DefaultErrorCode = "UNHANDLED_EXCEPTION";
     public const string DefaultErrorMessage = "Unhandled exception was thrown by the application. Please try again and contact support if the problem persists.";
 
@@ -59,8 +59,8 @@ public class CommonExceptionHandler : IExceptionHandler
     {
         return new ProblemDetails
         {
-            Type = $"https://httpstatuses.com/{(int)DefaultStatusCode}",
-            Status = (int)DefaultStatusCode,
+            Type = $"https://httpstatuses.com/{(int)DefaultHttpStatusCode}",
+            Status = (int)DefaultHttpStatusCode,
             Title = DefaultErrorCode,
             Detail = DefaultErrorMessage,
         };
