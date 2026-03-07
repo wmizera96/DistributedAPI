@@ -32,11 +32,9 @@ public class ErrorHandlingTests : BaseIntegrationTest<ErrorStartup>
         Assert.Equal(CommonExceptionHandler.DefaultHttpStatusCode, response.StatusCode);        
         Assert.Equal(CommonExceptionHandler.DefaultErrorCode, content.Title);
         Assert.Equal(CommonExceptionHandler.DefaultErrorMessage, content.Detail);
-        
-        var parameters = (JsonElement)content.Extensions["parameters"];
-        var responseExceptionMessage = parameters.GetProperty("exceptionMessage").GetString();
-        
-        Assert.Equal(exceptionMessage, responseExceptionMessage);
+
+        Assert.Equal(exceptionMessage, content.Extensions["exceptionMessage"].ToString());
+        Assert.NotEmpty(content.Extensions["exceptionStackTrace"].ToString());
     }
     
     [Fact]
