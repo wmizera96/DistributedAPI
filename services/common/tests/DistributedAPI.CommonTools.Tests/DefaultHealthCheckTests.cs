@@ -48,7 +48,7 @@ public class DefaultHealthCheckTests : BaseIntegrationTest<DefaultHealthCheckSta
     public async Task ReadinessHealthCheck_DoesNotRequireAuthorization()
     {
         // Act
-        var response = await ApiCaller.GetAsync("health/live", Array.Empty<BasePolicy>());
+        var response = await ApiCaller.GetAsync("health/live", Array.Empty<BasePolicy>(), false);
         
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);

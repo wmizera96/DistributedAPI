@@ -29,7 +29,7 @@ public class VersionTests : BaseIntegrationTest<VersionStartup>
     public async Task VersionEndpoint_DoesNotRequireAuthorization()
     {
         // Act
-        var response = await ApiCaller.GetAsync("version", Array.Empty<BasePolicy>());
+        var response = await ApiCaller.GetAsync("version", Array.Empty<BasePolicy>(), false);
         
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
