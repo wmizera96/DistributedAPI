@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace DistributedAPI.CommonTools.Extensions.Configuration;
+namespace DistributedAPI.CommonTools.Extensions;
 
 public static class HostEnvironmentExtensions
 {

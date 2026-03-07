@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using DistributedAPI.CommonTools.Extensions.Configuration;
+using DistributedAPI.CommonTools.Extensions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
