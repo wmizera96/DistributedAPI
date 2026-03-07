@@ -1,12 +1,12 @@
-﻿using DistributedAPI.CommonTools.Extensions;
+using DistributedAPI.CommonTools.Extensions;
 
-namespace DistributedAPI.CommonTools.Test.API;
+namespace DistributedAPI.CommonTools.Test.API.Startups;
 
-public class AuthorizationStartup
+public class DefaultHealthCheckStartup
 {
     private IConfiguration Configuration { get; }
     
-    public AuthorizationStartup(IConfiguration configuration)
+    public DefaultHealthCheckStartup(IConfiguration configuration)
     {
         Configuration = configuration;
     }
@@ -22,6 +22,9 @@ public class AuthorizationStartup
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.UseCommonApi(Configuration);
+        app.UseCommonApi(Configuration, options =>
+        {
+            // no custom health-checks defined
+        });
     }
 }

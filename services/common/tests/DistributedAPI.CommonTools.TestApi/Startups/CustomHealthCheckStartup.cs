@@ -1,6 +1,6 @@
 ﻿using DistributedAPI.CommonTools.Extensions;
 
-namespace DistributedAPI.CommonTools.Test.API;
+namespace DistributedAPI.CommonTools.Test.API.Startups;
 
 public class CustomHealthCheckStartup
 {
