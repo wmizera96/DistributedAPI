@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using DistributedAPI.CommonTools.Extensions.Configuration;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +29,7 @@ public class CommonExceptionHandler : IExceptionHandler
         
         httpContext.Response.StatusCode = problemDetails.Status!.Value;
 
-        // TODO fix this, in tests extensions are not added with the env check
-        // if (_env.IsLocalDev() || _env.IsDEV())
+        if (_env.IsLocalDev() || _env.IsDEV())
         {
             problemDetails.Extensions.Add("exceptionMessage", exception.Message);
             problemDetails.Extensions.Add("exceptionStackTrace", exception.StackTrace);
