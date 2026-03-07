@@ -12,6 +12,7 @@ public class ApiFactory<TStartup> : WebApplicationFactory<TStartup> where TStart
 {
     private Action<IServiceCollection> _configureServices;
     private IEnumerable<BasePolicy> _policies;
+    private bool _isAuthenticated = true;
     
     public void ConfigureCustomServices(Action<IServiceCollection> configureServices)
     {
@@ -21,6 +22,13 @@ public class ApiFactory<TStartup> : WebApplicationFactory<TStartup> where TStart
     public HttpClient CreateAuthenticatedHttpClient(IEnumerable<BasePolicy> policies)
     {
         _policies = policies;
+        
+        return CreateClient();
+    }
+
+    public HttpClient CreateUnauthenticatedHttpClient()
+    {
+        _isAuthenticated = false;
         
         return CreateClient();
     }
@@ -36,11 +44,11 @@ public class ApiFactory<TStartup> : WebApplicationFactory<TStartup> where TStart
         builder.ConfigureServices(services =>
         {
             services.AddAuthentication("Test")
-                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", options => { });
+                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", _ => { });
 
             services.AddAuthorization();
             
-            services.AddScoped<TestUserContext>(_ => new TestUserContext(_policies));
+            services.AddScoped<TestUserContext>(_ => new TestUserContext(_policies, _isAuthenticated));
             
             _configureServices?.Invoke(services);
         });

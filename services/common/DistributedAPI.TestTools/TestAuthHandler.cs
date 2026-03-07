@@ -18,6 +18,11 @@ public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
+        if (!_userContext.IsAuthenticated)
+        {
+            return Task.FromResult(AuthenticateResult.Fail("user not authenticated"));
+        }
+        
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, "TestUser"),

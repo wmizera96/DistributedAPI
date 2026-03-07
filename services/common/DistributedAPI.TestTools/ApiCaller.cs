@@ -19,24 +19,24 @@ public class ApiCaller<TStartup> where TStartup : class
         _configureServices = configureServices;
     }
 
-    public async Task<HttpResponseMessage> GetAsync(string url, IEnumerable<BasePolicy> permissions)
+    public async Task<HttpResponseMessage> GetAsync(string url, IEnumerable<BasePolicy> permissions, bool isAuthenticated = true)
     {
         var message = new HttpRequestMessage(HttpMethod.Get, url);
         
-        return await SendRequestAsync(message, permissions);
+        return await SendRequestAsync(message, permissions, isAuthenticated);
     }
     
-    public async Task<HttpResponseMessage> PostAsync<T>(string url, T data, IEnumerable<BasePolicy> permissions)
+    public async Task<HttpResponseMessage> PostAsync<T>(string url, T data, IEnumerable<BasePolicy> permissions, bool isAuthenticated = true)
     {
         var message = new HttpRequestMessage(HttpMethod.Post, url);
         message.Content = JsonContent.Create(data);
-        return await SendRequestAsync(message, permissions);
+        return await SendRequestAsync(message, permissions, isAuthenticated);
     }
 
-    private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage message, IEnumerable<BasePolicy> permissions)
+    private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage message, IEnumerable<BasePolicy> permissions, bool isAuthenticated)
     {
         _apiFactory.ConfigureCustomServices(_configureServices);
-        using var client = _apiFactory.CreateAuthenticatedHttpClient(permissions);
+        using var client = isAuthenticated ? _apiFactory.CreateAuthenticatedHttpClient(permissions) :  _apiFactory.CreateUnauthenticatedHttpClient();
 
         return await client.SendAsync(message);
     }
