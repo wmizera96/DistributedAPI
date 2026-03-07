@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
-    <PackageReference Include="DistributedAPI.TestTools" Version="1.0.0-local-202603071302" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="xunit.v3" Version="3.2.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
@@ -20,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\common\DistributedAPI.TestTools\DistributedAPI.TestTools.csproj" />
     <ProjectReference Include="..\..\DistributedAPI.Books.API\DistributedAPI.Books.API.csproj" />
   </ItemGroup>
 
