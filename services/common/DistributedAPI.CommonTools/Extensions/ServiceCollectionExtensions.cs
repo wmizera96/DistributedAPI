@@ -22,6 +22,9 @@ public static class ServiceCollectionExtensions
         var tenantId = configuration.GetValue<string>(AzureAdTenantIdKey);
         var clientId = configuration.GetValue<string>(AzureAdClientIdKey);
 
+        services.AddExceptionHandler<CommonExceptionHandler>();
+        services.AddProblemDetails();
+        
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
         { 

@@ -19,6 +19,9 @@ public static class ApplicationBuilderExtensions
         configure?.Invoke(commonOptions);
 
         var clientId = configuration.GetValue<string>(AzureAdSwaggerClientIdKey);
+        
+        app.UseExceptionHandler();
+        
         app.UseSwagger();
         app.UseSwaggerUI(options =>
         {
@@ -27,6 +30,8 @@ public static class ApplicationBuilderExtensions
         });
         
         app.UseRouting();
+        
+        app.UseHttpsRedirection();
         
         app.UseAuthentication();
         app.UseAuthorization();

@@ -1,4 +1,5 @@
 ﻿using DistributedAPI.Books.Application;
+using DistributedAPI.Books.Application.Model;
 using DistributedAPI.CommonTools.Extensions;
 
 namespace DistributedAPI.Books.API;
@@ -21,6 +22,7 @@ public class Startup
         });
         
         services.AddScoped<IBooksService, BooksService>();
+        services.AddScoped<IErrorService, ErrorService>();
     }
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
