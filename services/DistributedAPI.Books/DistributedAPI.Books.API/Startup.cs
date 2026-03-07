@@ -27,6 +27,9 @@ public class Startup
     
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.UseCommonApi(Configuration);
+        app.UseCommonApi(Configuration, options =>
+        {
+            options.UseCorsPolicy("CorsPolicy");
+        });
     }
 }

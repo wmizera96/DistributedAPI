@@ -28,6 +28,24 @@ public static class ApplicationBuilderExtensions
             options.OAuthClientId(clientId);
             options.OAuthUsePkce(); // ważne dla Authorization Code Flow
         });
+
+        if (!string.IsNullOrWhiteSpace(commonOptions.CorsConfigSection))
+        {
+            var corsConfig = configuration.GetSection(commonOptions.CorsConfigSection).Get<CorsConfiguration>();
+
+            if (corsConfig.AllowedOrigins.Length == 0)
+            {
+                throw new ConfigurationMissingException($"{commonOptions.CorsConfigSection}:{nameof(corsConfig.AllowedOrigins)}");
+            }
+            
+            app.UseCors(builder =>
+            {
+                builder.AllowCredentials().WithOrigins(corsConfig.AllowedOrigins);
+
+                _ = corsConfig.AllowedHeaders.Length > 0 ? builder.WithHeaders(corsConfig.AllowedHeaders) : builder.AllowAnyHeader();
+                _ = corsConfig.AllowedMethods.Length > 0 ? builder.WithMethods(corsConfig.AllowedMethods) : builder.AllowAnyMethod();
+            });
+        }
         
         app.UseRouting();
         
